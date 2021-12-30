@@ -8,13 +8,11 @@ import {
   unknownEndpoint,
 } from './controllers/errorController';
 import tripRouter from './routes/tripRoutes';
+import testRouter from './routes/testRouter';
 
 const app: Application = express();
 
 app.use(express.json());
-
-console.log('ENVIRONMENT');
-console.log(process.env.NODE_ENV);
 
 const db = config.DB_CONNECTION || 'db';
 
@@ -28,6 +26,10 @@ mongoose
   });
 
 app.use('/api/trips', tripRouter);
+
+if (process.env.NODE_ENV === 'test') {
+  app.use('/api/testing', testRouter);
+}
 
 app.use(unknownEndpoint);
 app.use(errorController);

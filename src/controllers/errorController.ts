@@ -9,7 +9,11 @@ export const errorController = (
   console.log('FROM ERRORCONTROLLER');
   console.log(err);
 
-  if (err.name === 'ValidationError' || err.name === 'CastError') {
+  if (
+    err.name === 'ValidationError' ||
+    err.name === 'CastError' ||
+    err.name === 'Error'
+  ) {
     res.status(400).json({
       status: 'fail',
       message: err.message,

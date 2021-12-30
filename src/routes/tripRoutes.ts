@@ -8,6 +8,9 @@ router
   .get(tripController.getAllTrips)
   .post(tripController.createTrip);
 
-router.route('/:id').delete(tripController.deleteTrip);
+router
+  .route('/:id')
+  .delete(tripController.deleteTrip)
+  .get(tripController.getOneTrip);
 
 export default router;
