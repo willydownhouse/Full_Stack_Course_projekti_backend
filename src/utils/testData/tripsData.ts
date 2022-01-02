@@ -1,5 +1,5 @@
 const okTrip = {
-  name: 'Ski0',
+  name: 'Ski0 okTrip',
   location: {
     city: 'Courmayeur',
     country: 'Italy',

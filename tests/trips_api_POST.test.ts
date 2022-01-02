@@ -27,9 +27,6 @@ describe('TESTS FOR CREATING A NEW BLOG', () => {
   test('Fails when name type is number', async () => {
     const res = await api.post('/api/trips').send(testTrips.tripNameIsNumber);
 
-    console.log(res.body);
-    console.log(testTrips.tripNameIsNumber);
-
     expect(res.statusCode).toEqual(400);
     expect(res.body.message).toBe('Missing or invalid type of trip name');
   });
@@ -77,10 +74,10 @@ describe('TESTS FOR CREATING A NEW BLOG', () => {
     expect(res.body).toHaveProperty('images');
     expect(res.body).toHaveProperty('createdAt');
     expect(res.body).toHaveProperty('updatedAt');
+    expect(res.body).toHaveProperty('active');
   });
 
   test('Creating trip with extra properties -> extra properties are not included', async () => {
-    console.log(testTrips.okTripWithExtraFields);
     const res = await api
       .post('/api/trips')
       .send(testTrips.okTripWithExtraFields);

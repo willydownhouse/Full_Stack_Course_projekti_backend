@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import mongoose from 'mongoose';
-
 import 'express-async-errors';
+
 import config from './utils/config';
 import {
   errorController,

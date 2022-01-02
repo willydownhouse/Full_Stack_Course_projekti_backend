@@ -35,12 +35,18 @@ const tripSchema: Schema = new Schema(
     },
     tecnicalDifficulty: {
       type: String,
-      enum: ['easy', 'intermediate', 'hard', 'extreme'],
+      enum: {
+        values: ['easy', 'intermediate', 'hard', 'extreme'],
+        message: '{VALUE} is not supported',
+      },
       default: 'intermediate',
     },
     physicalDifficulty: {
       type: String,
-      enum: ['easy', 'intermediate', 'hard', 'extreme'],
+      enum: {
+        values: ['easy', 'intermediate', 'hard', 'extreme'],
+        message: '{VALUE} is not supported',
+      },
       default: 'intermediate',
     },
 
@@ -59,10 +65,14 @@ const tripSchema: Schema = new Schema(
       type: [String],
     },
     startDates: {
-      type: [Date],
+      type: [String],
     },
     description: {
       type: String,
+    },
+    active: {
+      type: Boolean,
+      default: true,
     },
   },
   {

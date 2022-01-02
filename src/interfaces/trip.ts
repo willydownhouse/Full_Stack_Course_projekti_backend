@@ -15,5 +15,6 @@ export default interface ITrip {
   reviewAverage?: number;
   mainImg?: string;
   images?: string[];
-  startDates?: Date[];
+  startDates?: string[];
+  active: boolean;
 }

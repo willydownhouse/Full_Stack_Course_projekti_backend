@@ -1,7 +1,7 @@
 import Trip from '../models/tripModel';
 import ITrip from '../interfaces/trip';
 import { Request, Response } from 'express';
-import { makeSureThatTripNameIsString } from '../typeguards/trip';
+import { typeChecksToReqBody } from '../typeguards/trip';
 
 const getAllTrips = async (_: Request, res: Response) => {
   const trips: ITrip[] = await Trip.find();
@@ -27,7 +27,7 @@ const getOneTrip = async (req: Request, res: Response) => {
 
 const createTrip = async (req: Request, res: Response) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const checkedReqBody = makeSureThatTripNameIsString(req.body);
+  const checkedReqBody = typeChecksToReqBody(req.body);
 
   const trip: ITrip = await Trip.create(checkedReqBody);
 
