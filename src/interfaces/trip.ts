@@ -3,6 +3,7 @@ import { TLocation } from '../types/location';
 
 export default interface ITrip {
   id: mongoose.Schema.Types.ObjectId;
+  type: string;
   name: string;
   location: TLocation;
   duration: number;

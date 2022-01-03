@@ -10,6 +10,7 @@ export const resetDatabase = async (_: Request, res: Response) => {
 export const initDataBase = async (_: Request, res: Response) => {
   const trips = await Trip.insertMany([
     {
+      type: 'mtb',
       name: 'Finale MTB week',
       location: {
         city: 'Finale Ligure',
@@ -24,6 +25,7 @@ export const initDataBase = async (_: Request, res: Response) => {
       description: 'Seven days of hard riding in Liguria.',
     },
     {
+      type: 'ski',
       name: 'Lyngen Ski week',
       location: {
         city: 'Lyngseidet',

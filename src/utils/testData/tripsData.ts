@@ -1,4 +1,5 @@
 const okTrip = {
+  type: 'ski',
   name: 'Ski0 okTrip',
   location: {
     city: 'Courmayeur',

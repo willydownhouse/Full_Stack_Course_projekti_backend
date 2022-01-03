@@ -3,8 +3,8 @@ import ITrip from '../interfaces/trip';
 import { Request, Response } from 'express';
 import { typeChecksToReqBody } from '../typeguards/trip';
 
-const getAllTrips = async (_: Request, res: Response) => {
-  const trips: ITrip[] = await Trip.find();
+const getAllTrips = async (req: Request, res: Response) => {
+  const trips: ITrip[] = await Trip.find(req.query);
 
   res.status(200).json({
     docs: trips.length,

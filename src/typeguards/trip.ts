@@ -23,9 +23,7 @@ export const typeChecksToReqBody = (reqbody: any): any => {
     }
     startDates.forEach((val: MomentInput) => {
       if (!moment(val, 'DD/MM/YYYY').isValid()) {
-        throw new Error(
-          'There is at least one invalid date in start dates array'
-        );
+        throw new Error('There is invalid dates in start dates array');
       }
     });
   }

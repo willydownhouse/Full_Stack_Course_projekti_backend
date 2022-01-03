@@ -4,6 +4,14 @@ import uniqueValidator from 'mongoose-unique-validator';
 
 const tripSchema: Schema = new Schema(
   {
+    type: {
+      type: String,
+      enum: {
+        values: ['ski', 'mtb', 'paragliding'],
+        message: '{VALUE} is not supported',
+      },
+      required: [true, 'Trip must have a type'],
+    },
     name: {
       type: String,
       required: [true, 'Trip must have a name'],
