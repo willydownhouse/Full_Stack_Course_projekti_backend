@@ -11,7 +11,7 @@ beforeAll(async () => {
   await api.post('/api/testing/init');
 });
 
-describe('TESTS FOR CREATING A NEW BLOG', () => {
+describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('New trip is created with valid data', async () => {
     const res = await api.post('/api/trips').send(testTrips.okTrip);
 
@@ -22,13 +22,15 @@ describe('TESTS FOR CREATING A NEW BLOG', () => {
     const res = await api.post('/api/trips').send(testTrips.tripWithoutName);
 
     expect(res.statusCode).toEqual(400);
-    expect(res.body.message).toBe('Missing or invalid type of trip name');
+    expect(res.body.message).toBe(
+      'Trip validation failed: name: Trip must have a name'
+    );
   });
   test('Fails when name type is number', async () => {
     const res = await api.post('/api/trips').send(testTrips.tripNameIsNumber);
 
     expect(res.statusCode).toEqual(400);
-    expect(res.body.message).toBe('Missing or invalid type of trip name');
+    expect(res.body.message).toBe('Invalid type of trip name');
   });
   test('Fails without location', async () => {
     const res = await api

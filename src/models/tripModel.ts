@@ -80,7 +80,6 @@ const tripSchema: Schema = new Schema(
   }
 );
 
-// eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 tripSchema.plugin(uniqueValidator);
 
 export default mongoose.model<ITrip>('Trip', tripSchema);

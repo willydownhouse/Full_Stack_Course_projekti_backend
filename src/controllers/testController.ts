@@ -15,7 +15,6 @@ export const initDataBase = async (_: Request, res: Response) => {
         city: 'Finale Ligure',
         country: 'Italy',
       },
-
       duration: 7,
       price: 399,
       maxGroupSize: 6,
@@ -30,7 +29,6 @@ export const initDataBase = async (_: Request, res: Response) => {
         city: 'Lyngseidet',
         country: 'Norway',
       },
-
       duration: 7,
       price: 599,
       maxGroupSize: 6,

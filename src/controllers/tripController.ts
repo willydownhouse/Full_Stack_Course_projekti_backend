@@ -34,6 +34,29 @@ const createTrip = async (req: Request, res: Response) => {
   res.status(201).json(trip);
 };
 
+const updateTrip = async (req: Request, res: Response) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const checkedReqBody = typeChecksToReqBody(req.body);
+
+  const trip: ITrip | null = await Trip.findByIdAndUpdate(
+    { _id: req.params.id },
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    checkedReqBody,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  if (!trip) {
+    res.status(400).json({
+      status: 'fail',
+      message: 'No document with that ID',
+    });
+  }
+  res.status(200).json(trip);
+};
+
 const deleteTrip = async (req: Request, res: Response) => {
   const trip: ITrip | null = await Trip.findByIdAndDelete({
     _id: req.params.id,
@@ -54,4 +77,5 @@ export default {
   createTrip,
   deleteTrip,
   getOneTrip,
+  updateTrip,
 };

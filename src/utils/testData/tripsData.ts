@@ -9,7 +9,7 @@ const okTrip = {
   maxGroupSize: 4,
   tecnicalDifficulty: 'intermediate',
   physicalDifficulty: 'hard',
-  startDates: [new Date('3/8/22'), new Date('3/15/22')],
+  startDates: ['3/8/22', '3/12/22'],
   description: 'Seven days of hard skiing in Monte Bianco range',
 };
 

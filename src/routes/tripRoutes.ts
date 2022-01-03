@@ -10,7 +10,8 @@ router
 
 router
   .route('/:id')
+  .get(tripController.getOneTrip)
   .delete(tripController.deleteTrip)
-  .get(tripController.getOneTrip);
+  .patch(tripController.updateTrip);
 
 export default router;
