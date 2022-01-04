@@ -1,8 +1,5 @@
 import moment, { MomentInput } from 'moment';
-
-const isString = (val: unknown): val is string => {
-  return typeof val === 'string' || val instanceof String;
-};
+import { isString } from './utils';
 
 export const typeChecksToReqBody = (reqbody: any): any => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

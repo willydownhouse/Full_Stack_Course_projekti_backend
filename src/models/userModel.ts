@@ -1,10 +1,12 @@
 import mongoose, { Schema } from 'mongoose';
 import IUser from '../interfaces/user';
 import isemail from 'isemail';
+import uniqueValidator from 'mongoose-unique-validator';
+import bcrypt from 'bcrypt';
 
 const userSchema = new Schema(
   {
-    username: {
+    email: {
       type: String,
       required: [true, 'User must have an email'],
       validate: {
@@ -12,6 +14,7 @@ const userSchema = new Schema(
           return isemail.validate(val);
         },
       },
+      unique: true,
     },
     password: {
       type: String,
@@ -20,7 +23,7 @@ const userSchema = new Schema(
       required: [true, 'User must have a password'],
     },
     confirmPassword: {
-      type: String,
+      type: String || undefined,
       required: [true, 'Password must be confirmed'],
       validate: {
         validator: function (this: IUser, val: string) {
@@ -54,5 +57,15 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+userSchema.plugin(uniqueValidator);
+
+userSchema.pre('save', async function (this: IUser, next) {
+  this.password = await bcrypt.hash(this.password, 12);
+
+  this.confirmPassword = undefined;
+
+  next();
+});
 
 export default mongoose.model<IUser>('User', userSchema);

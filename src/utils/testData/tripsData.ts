@@ -32,6 +32,7 @@ const tripDurationIsString = {
 };
 
 const okTripWithOnlyRequiredFields = {
+  type: 'mtb',
   name: 'Ski4 defaults gets created',
   location: {
     city: 'Courmayeur',

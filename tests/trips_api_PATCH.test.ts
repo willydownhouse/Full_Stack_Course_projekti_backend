@@ -37,11 +37,15 @@ describe('TESTS FOR UPDATING A TRIP', () => {
     expect(updatedTrip.statusCode).toEqual(400);
     expect(updatedTrip.body.message).toBe('Invalid type of trip name');
   });
-  test('Updating only the properties that trip model include', async () => {
+  test('Updates only the properties that trip model include (name, duration, location) in this case', async () => {
     const updatedTrip = await api
-      .patch(`/api/trips/${res.body.data[0]._id}`)
+      .patch(`/api/trips/${res.body.data[1]._id}`)
       .send({
         name: 'Dont update properties that does not exist',
+        location: {
+          city: 'Oteren',
+          country: 'Norway',
+        },
         duration: 777,
         hei: ['tere'],
         ciao: 34,
@@ -55,6 +59,7 @@ describe('TESTS FOR UPDATING A TRIP', () => {
     expect(updatedTrip.body.name).toBe(
       'Dont update properties that does not exist'
     );
+    expect(updatedTrip.body.location.city).toBe('Oteren');
     expect(updatedTrip.body.duration).toEqual(777);
   });
 });

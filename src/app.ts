@@ -9,6 +9,8 @@ import {
 } from './controllers/errorController';
 import tripRouter from './routes/tripRoutes';
 import testRouter from './routes/testRouter';
+import signupRouter from './routes/signupRouter';
+import loginRouter from './routes/loginRouter';
 
 const app: Application = express();
 
@@ -25,11 +27,12 @@ mongoose
     console.log('There was a problem connecting to database ');
   });
 
-app.use('/api/trips', tripRouter);
-
 if (process.env.NODE_ENV === 'test') {
   app.use('/api/testing', testRouter);
 }
+app.use('/api/signup', signupRouter);
+app.use('/api/login', loginRouter);
+app.use('/api/trips', tripRouter);
 
 app.use(unknownEndpoint);
 app.use(errorController);
