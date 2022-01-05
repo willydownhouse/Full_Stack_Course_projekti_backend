@@ -16,13 +16,13 @@ const getOneTrip = async (req: Request, res: Response) => {
   const trip: ITrip | null = await Trip.findById({ _id: req.params.id });
 
   if (!trip) {
-    res.status(400).json({
+    return res.status(400).json({
       status: 'fail',
       message: 'No document with that ID',
     });
   }
 
-  res.status(200).json(trip);
+  return res.status(200).json(trip);
 };
 
 const createTrip = async (req: Request, res: Response) => {
@@ -49,12 +49,12 @@ const updateTrip = async (req: Request, res: Response) => {
   );
 
   if (!trip) {
-    res.status(400).json({
+    return res.status(400).json({
       status: 'fail',
       message: 'No document with that ID',
     });
   }
-  res.status(200).json(trip);
+  return res.status(200).json(trip);
 };
 
 const deleteTrip = async (req: Request, res: Response) => {
@@ -63,13 +63,13 @@ const deleteTrip = async (req: Request, res: Response) => {
   });
 
   if (!trip) {
-    res.status(400).json({
+    return res.status(400).json({
       status: 'fail',
       message: 'No document with that ID',
     });
   }
 
-  res.status(204).end();
+  return res.status(204).end();
 };
 
 export default {

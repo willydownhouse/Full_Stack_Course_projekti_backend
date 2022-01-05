@@ -7,6 +7,7 @@ const api = supertest(app);
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let res: any;
+let token: string;
 
 beforeAll(async () => {
   await api.post('/api/testing/reset');
@@ -16,9 +17,18 @@ beforeAll(async () => {
 });
 
 describe('TESTS FOR UPDATING A TRIP', () => {
+  beforeAll(async () => {
+    const res = await api.post('/api/login').send({
+      email: 'ville@test.fi',
+      password: 'test1234',
+    });
+
+    token = res.body.token as string;
+  });
   test('Trip name gets updated', async () => {
     const updatedTrip = await api
       .patch(`/api/trips/${res.body.data[0]._id}`)
+      .set('Authorization', 'Bearer ' + token)
       .send({
         name: 'Trip name gets updated',
       });
@@ -30,6 +40,7 @@ describe('TESTS FOR UPDATING A TRIP', () => {
   test('Updating fails with invalid name type (number)', async () => {
     const updatedTrip = await api
       .patch(`/api/trips/${res.body.data[0]._id}`)
+      .set('Authorization', 'Bearer ' + token)
       .send({
         name: 423423,
       });
@@ -40,6 +51,7 @@ describe('TESTS FOR UPDATING A TRIP', () => {
   test('Updates only the properties that trip model include (name, duration, location) in this case', async () => {
     const updatedTrip = await api
       .patch(`/api/trips/${res.body.data[1]._id}`)
+      .set('Authorization', 'Bearer ' + token)
       .send({
         name: 'Dont update properties that does not exist',
         location: {

@@ -18,13 +18,13 @@ export const checkSignUpReqBody = ({
   confirmPassword,
 }: signUpLoginFields): checkedReqBody => {
   if (!email || !isString(email)) {
-    throw new Error('Missing or invalid email');
+    throw new Error('Please insert your email');
   }
   if (!password || !isString(password)) {
-    throw new Error('Missing or invalid password');
+    throw new Error('Please insert your password');
   }
   if (!confirmPassword || !isString(confirmPassword)) {
-    throw new Error('Missing or invalid confirmed password');
+    throw new Error('Please confirm your password');
   }
 
   return { email, password, confirmPassword };
@@ -35,10 +35,10 @@ export const checkLoginReqBody = ({
   password,
 }: signUpLoginFields): checkedReqBody => {
   if (!email || !isString(email)) {
-    throw new Error('Wrong email or password');
+    throw new Error('Please insert your email');
   }
   if (!password || !isString(password)) {
-    throw new Error('Wrong email or password');
+    throw new Error('Please insert your password');
   }
   return { email, password };
 };

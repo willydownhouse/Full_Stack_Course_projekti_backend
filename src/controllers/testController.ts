@@ -1,8 +1,10 @@
 import Trip from '../models/tripModel';
+import User from '../models/userModel';
 import { Request, Response } from 'express';
 
 export const resetDatabase = async (_: Request, res: Response) => {
   await Trip.deleteMany({});
+  await User.deleteMany({});
 
   res.status(204).end();
 };
@@ -41,7 +43,18 @@ export const initDataBase = async (_: Request, res: Response) => {
     },
   ]);
 
-  res.status(201).json(trips);
+  const user = new User({
+    email: 'ville@test.fi',
+    password: 'test1234',
+    confirmPassword: 'test1234',
+  });
+
+  await user.save();
+
+  res.status(201).json({
+    user,
+    trips,
+  });
 };
 
 export default {

@@ -5,12 +5,23 @@ import app from '../src/app';
 
 const api = supertest(app);
 
+let token: string;
+
 beforeAll(async () => {
   await api.post('/api/testing/reset');
   await api.post('/api/testing/init');
 });
 
 describe('GET REQUESTS FOR TRIPS', () => {
+  beforeAll(async () => {
+    const res = await api.post('/api/login').send({
+      email: 'ville@test.fi',
+      password: 'test1234',
+    });
+
+    token = res.body.token as string;
+  });
+
   test('GET all trips', async () => {
     const res = await api.get('/api/trips');
 
@@ -40,9 +51,9 @@ describe('DELETED REQUESTS', () => {
   test('trip deleted by ID', async () => {
     const res = await api.get('/api/trips');
 
-    const resFromDelete = await api.delete(
-      `/api/trips/${res.body.data[0]._id}`
-    );
+    const resFromDelete = await api
+      .delete(`/api/trips/${res.body.data[0]._id}`)
+      .set('Authorization', 'Bearer ' + token);
 
     const resAfterDeleteGetAllTrips = await api.get('/api/trips');
 

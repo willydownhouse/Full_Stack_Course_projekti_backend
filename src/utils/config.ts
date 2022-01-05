@@ -4,6 +4,7 @@ dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN;
 
 const DB_CONNECTION =
   process.env.NODE_ENV === 'test'
@@ -14,4 +15,5 @@ export default {
   PORT,
   DB_CONNECTION,
   JWT_SECRET,
+  JWT_EXPIRES_IN,
 };

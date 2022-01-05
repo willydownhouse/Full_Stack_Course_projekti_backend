@@ -6,20 +6,36 @@ import app from '../src/app';
 
 const api = supertest(app);
 
+let token: string;
+
 beforeAll(async () => {
   await api.post('/api/testing/reset');
   await api.post('/api/testing/init');
 });
 
 describe('TESTS FOR CREATING A NEW TRIP', () => {
+  beforeAll(async () => {
+    const res = await api.post('/api/login').send({
+      email: 'ville@test.fi',
+      password: 'test1234',
+    });
+
+    token = res.body.token as string;
+  });
   test('New trip is created with valid data', async () => {
-    const res = await api.post('/api/trips').send(testTrips.okTrip);
+    const res = await api
+      .post('/api/trips')
+      .set('Authorization', 'Bearer ' + token)
+      .send(testTrips.okTrip);
 
     expect(res.statusCode).toEqual(201);
   });
 
   test('Fails without trip name', async () => {
-    const res = await api.post('/api/trips').send(testTrips.tripWithoutName);
+    const res = await api
+      .post('/api/trips')
+      .set('Authorization', 'Bearer ' + token)
+      .send(testTrips.tripWithoutName);
 
     expect(res.statusCode).toEqual(400);
     expect(res.body.message).toBe(
@@ -27,7 +43,10 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
     );
   });
   test('Fails when name type is number', async () => {
-    const res = await api.post('/api/trips').send(testTrips.tripNameIsNumber);
+    const res = await api
+      .post('/api/trips')
+      .set('Authorization', 'Bearer ' + token)
+      .send(testTrips.tripNameIsNumber);
 
     expect(res.statusCode).toEqual(400);
     expect(res.body.message).toBe('Invalid type of trip name');
@@ -35,6 +54,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Fails without location', async () => {
     const res = await api
       .post('/api/trips')
+      .set('Authorization', 'Bearer ' + token)
       .send(testTrips.tripWithoutLocation);
 
     expect(res.statusCode).toEqual(400);
@@ -45,6 +65,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Fails without duration', async () => {
     const res = await api
       .post('/api/trips')
+      .set('Authorization', 'Bearer ' + token)
       .send(testTrips.tripWithOutDuration);
 
     expect(res.statusCode).toEqual(400);
@@ -55,6 +76,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Fails with duration type is invalid (String) ', async () => {
     const res = await api
       .post('/api/trips')
+      .set('Authorization', 'Bearer ' + token)
       .send(testTrips.tripDurationIsString);
 
     expect(res.statusCode).toEqual(400);
@@ -65,6 +87,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Creating trip only required properties -> default properties gets created ', async () => {
     const res = await api
       .post('/api/trips')
+      .set('Authorization', 'Bearer ' + token)
       .send(testTrips.okTripWithOnlyRequiredFields);
 
     expect(res.statusCode).toEqual(201);
@@ -82,6 +105,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Creating trip with extra properties -> extra properties are not included', async () => {
     const res = await api
       .post('/api/trips')
+      .set('Authorization', 'Bearer ' + token)
       .send(testTrips.okTripWithExtraFields);
 
     expect(res.statusCode).toEqual(201);

@@ -18,6 +18,11 @@ export const errorController = (
       status: 'fail',
       message: err.message,
     });
+  } else if (err.name === 'JsonWebTokenError') {
+    res.status(401).json({
+      status: 'error',
+      message: err.message,
+    });
   }
 
   next(err);
