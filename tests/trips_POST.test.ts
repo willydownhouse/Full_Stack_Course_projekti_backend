@@ -22,6 +22,11 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
 
     token = res.body.token as string;
   });
+  test('Does not work without a token', async () => {
+    const res = await api.post('/api/trips').send(testTrips.okTrip);
+
+    expect(res.statusCode).toEqual(401);
+  });
   test('New trip is created with valid data', async () => {
     const res = await api
       .post('/api/trips')

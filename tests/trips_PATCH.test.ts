@@ -25,6 +25,15 @@ describe('TESTS FOR UPDATING A TRIP', () => {
 
     token = res.body.token as string;
   });
+  test('Does not work without a token', async () => {
+    const updatedTrip = await api
+      .patch(`/api/trips/${res.body.data[0]._id}`)
+      .send({
+        name: 'Trip name gets updated',
+      });
+
+    expect(updatedTrip.statusCode).toEqual(401);
+  });
   test('Trip name gets updated', async () => {
     const updatedTrip = await api
       .patch(`/api/trips/${res.body.data[0]._id}`)

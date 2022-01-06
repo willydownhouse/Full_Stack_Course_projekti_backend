@@ -47,7 +47,16 @@ describe('GET REQUESTS FOR TRIPS', () => {
   });
 });
 
-describe('DELETED REQUESTS', () => {
+describe('DELETED REQUESTS FOR TRIPS', () => {
+  test('trip can not be deleted without token', async () => {
+    const res = await api.get('/api/trips');
+
+    const resFromDelete = await api.delete(
+      `/api/trips/${res.body.data[0]._id}`
+    );
+
+    expect(resFromDelete.statusCode).toEqual(401);
+  });
   test('trip deleted by ID', async () => {
     const res = await api.get('/api/trips');
 

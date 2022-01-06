@@ -3,6 +3,8 @@
 2.1.22: userModel, interface IUser, lisää typechekkejä uuden tripin lisäykseen, 3h
 3.1.22: updateTrip route ja testejä sille, review/booking models, 5h
 4.1.22: signup and login, 4h
+5.1.22: signup ja login testit, protect middleware, 7h
+6.1.22: Request objektiin sain lisätty userId avaimen, 2,5h
 
 Yhteensä:
-25h
+34,5h

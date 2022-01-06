@@ -69,8 +69,8 @@ const protect = async (req: Request, res: Response, next: NextFunction) => {
         message: 'No user for this token',
       });
     }
-    console.log(user);
-    //req.user = user.email;
+
+    req.userId = user.id;
   }
 
   return next();
