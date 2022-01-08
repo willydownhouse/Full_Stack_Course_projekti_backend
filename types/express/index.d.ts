@@ -1,9 +1,9 @@
-import mongoose from 'mongoose';
+import { RequestUser } from '../../src/interfaces/utils';
 
 declare global {
   namespace Express {
     interface Request {
-      userId?: mongoose.Schema.Types.ObjectId;
+      user?: RequestUser;
     }
   }
 }

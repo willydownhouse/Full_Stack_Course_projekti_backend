@@ -11,6 +11,7 @@ import tripRouter from './routes/tripRoutes';
 import testRouter from './routes/testRouter';
 import signupRouter from './routes/signupRouter';
 import loginRouter from './routes/loginRouter';
+import userRouter from './routes/userRouter';
 
 const app: Application = express();
 
@@ -33,6 +34,7 @@ if (process.env.NODE_ENV === 'test') {
 app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/trips', tripRouter);
+app.use('/api/users', userRouter);
 
 app.use(unknownEndpoint);
 app.use(errorController);

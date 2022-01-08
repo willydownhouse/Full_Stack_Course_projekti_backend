@@ -8,6 +8,7 @@ router.route('/').get(tripController.getAllTrips);
 router.route('/:id').get(tripController.getOneTrip);
 
 router.use(authController.protect);
+router.use(authController.restrictTo('admin'));
 
 router.route('/').post(tripController.createTrip);
 

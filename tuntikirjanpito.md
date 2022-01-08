@@ -5,6 +5,7 @@
 4.1.22: signup and login, 4h
 5.1.22: signup ja login testit, protect middleware, 7h
 6.1.22: Request objektiin sain lisätty userId avaimen, 2,5h
+8.1.22: only for admin middleware, userRoutes, 3h
 
 Yhteensä:
-34,5h
+37,5h

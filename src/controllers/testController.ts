@@ -43,16 +43,23 @@ export const initDataBase = async (_: Request, res: Response) => {
     },
   ]);
 
-  const user = new User({
+  const user1 = new User({
     email: 'ville@test.fi',
     password: 'test1234',
     confirmPassword: 'test1234',
   });
+  const user2 = new User({
+    email: 'admin@test.fi',
+    password: 'test1234',
+    confirmPassword: 'test1234',
+    role: 'admin',
+  });
 
-  await user.save();
+  await user1.save();
+  await user2.save();
 
   res.status(201).json({
-    user,
+    user1,
     trips,
   });
 };

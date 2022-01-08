@@ -70,14 +70,33 @@ const protect = async (req: Request, res: Response, next: NextFunction) => {
       });
     }
 
-    req.userId = user.id;
+    req.user = {
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      active: user.active,
+    };
   }
 
   return next();
 };
 
+const restrictTo =
+  (...roles: string[]) =>
+  (req: Request, res: Response, next: NextFunction) => {
+    if (!req.user || !roles.includes(req.user.role)) {
+      return res.status(401).json({
+        status: 'fail',
+        message: 'You are not allowed to do this action',
+      });
+    }
+
+    return next();
+  };
+
 export default {
   signUp,
   login,
   protect,
+  restrictTo,
 };
