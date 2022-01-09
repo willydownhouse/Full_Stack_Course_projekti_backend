@@ -6,6 +6,7 @@ import app from '../src/app';
 const api = supertest(app);
 
 let token: string;
+let token2: string;
 
 beforeAll(async () => {
   await api.post('/api/testing/reset');
@@ -18,8 +19,13 @@ describe('GET REQUESTS FOR TRIPS', () => {
       email: 'ville@test.fi',
       password: 'test1234',
     });
+    const res2 = await api.post('/api/login').send({
+      email: 'admin@test.fi',
+      password: 'test1234',
+    });
 
     token = res.body.token as string;
+    token2 = res2.body.token as string;
   });
 
   test('GET all trips', async () => {
@@ -47,7 +53,7 @@ describe('GET REQUESTS FOR TRIPS', () => {
   });
 });
 
-describe('DELETED REQUESTS FOR TRIPS', () => {
+describe('DELETE REQUESTS FOR TRIPS', () => {
   test('trip can not be deleted without token', async () => {
     const res = await api.get('/api/trips');
 
@@ -57,12 +63,24 @@ describe('DELETED REQUESTS FOR TRIPS', () => {
 
     expect(resFromDelete.statusCode).toEqual(401);
   });
-  test('trip deleted by ID', async () => {
+  test('trip can not be deleted if role is user', async () => {
     const res = await api.get('/api/trips');
 
     const resFromDelete = await api
       .delete(`/api/trips/${res.body.data[0]._id}`)
       .set('Authorization', 'Bearer ' + token);
+
+    expect(resFromDelete.statusCode).toEqual(401);
+    expect(resFromDelete.body.message).toBe(
+      'You are not allowed to do this action'
+    );
+  });
+  test('trip deleted by ID', async () => {
+    const res = await api.get('/api/trips');
+
+    const resFromDelete = await api
+      .delete(`/api/trips/${res.body.data[0]._id}`)
+      .set('Authorization', 'Bearer ' + token2);
 
     const resAfterDeleteGetAllTrips = await api.get('/api/trips');
 

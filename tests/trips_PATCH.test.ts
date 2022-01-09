@@ -8,6 +8,7 @@ const api = supertest(app);
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let res: any;
 let token: string;
+let token2: string;
 
 beforeAll(async () => {
   await api.post('/api/testing/reset');
@@ -19,11 +20,16 @@ beforeAll(async () => {
 describe('TESTS FOR UPDATING A TRIP', () => {
   beforeAll(async () => {
     const res = await api.post('/api/login').send({
+      email: 'admin@test.fi',
+      password: 'test1234',
+    });
+    const res2 = await api.post('/api/login').send({
       email: 'ville@test.fi',
       password: 'test1234',
     });
 
     token = res.body.token as string;
+    token2 = res2.body.token as string;
   });
   test('Does not work without a token', async () => {
     const updatedTrip = await api
@@ -33,6 +39,21 @@ describe('TESTS FOR UPDATING A TRIP', () => {
       });
 
     expect(updatedTrip.statusCode).toEqual(401);
+  });
+  test('Does not work if role is user', async () => {
+    const updatedTrip = await api
+      .patch(`/api/trips/${res.body.data[0]._id}`)
+      .set('Authorization', 'Bearer ' + token2)
+      .send({
+        name: 'Trip name update2',
+      });
+
+    console.log(updatedTrip.body);
+
+    expect(updatedTrip.statusCode).toEqual(401);
+    expect(updatedTrip.body.message).toBe(
+      'You are not allowed to do this action'
+    );
   });
   test('Trip name gets updated', async () => {
     const updatedTrip = await api

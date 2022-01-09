@@ -1,6 +1,7 @@
 import Trip from '../models/tripModel';
 import User from '../models/userModel';
 import { Request, Response } from 'express';
+//import bcrypt from 'bcrypt';
 
 export const resetDatabase = async (_: Request, res: Response) => {
   await Trip.deleteMany({});
@@ -55,11 +56,12 @@ export const initDataBase = async (_: Request, res: Response) => {
     role: 'admin',
   });
 
-  await user1.save();
   await user2.save();
+  await user1.save();
 
   res.status(201).json({
     user1,
+    user2,
     trips,
   });
 };

@@ -7,6 +7,7 @@ import app from '../src/app';
 const api = supertest(app);
 
 let token: string;
+let token2: string;
 
 beforeAll(async () => {
   await api.post('/api/testing/reset');
@@ -19,18 +20,32 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
       email: 'ville@test.fi',
       password: 'test1234',
     });
+    const res2 = await api.post('/api/login').send({
+      email: 'admin@test.fi',
+      password: 'test1234',
+    });
 
     token = res.body.token as string;
+    token2 = res2.body.token as string;
   });
   test('Does not work without a token', async () => {
     const res = await api.post('/api/trips').send(testTrips.okTrip);
 
     expect(res.statusCode).toEqual(401);
   });
-  test('New trip is created with valid data', async () => {
+  test('Does not work if role is user', async () => {
     const res = await api
       .post('/api/trips')
       .set('Authorization', 'Bearer ' + token)
+      .send(testTrips.okTrip);
+
+    expect(res.statusCode).toEqual(401);
+    expect(res.body.message).toBe('You are not allowed to do this action');
+  });
+  test('New trip is created with valid data', async () => {
+    const res = await api
+      .post('/api/trips')
+      .set('Authorization', 'Bearer ' + token2)
       .send(testTrips.okTrip);
 
     expect(res.statusCode).toEqual(201);
@@ -39,7 +54,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Fails without trip name', async () => {
     const res = await api
       .post('/api/trips')
-      .set('Authorization', 'Bearer ' + token)
+      .set('Authorization', 'Bearer ' + token2)
       .send(testTrips.tripWithoutName);
 
     expect(res.statusCode).toEqual(400);
@@ -50,7 +65,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Fails when name type is number', async () => {
     const res = await api
       .post('/api/trips')
-      .set('Authorization', 'Bearer ' + token)
+      .set('Authorization', 'Bearer ' + token2)
       .send(testTrips.tripNameIsNumber);
 
     expect(res.statusCode).toEqual(400);
@@ -59,7 +74,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Fails without location', async () => {
     const res = await api
       .post('/api/trips')
-      .set('Authorization', 'Bearer ' + token)
+      .set('Authorization', 'Bearer ' + token2)
       .send(testTrips.tripWithoutLocation);
 
     expect(res.statusCode).toEqual(400);
@@ -70,7 +85,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Fails without duration', async () => {
     const res = await api
       .post('/api/trips')
-      .set('Authorization', 'Bearer ' + token)
+      .set('Authorization', 'Bearer ' + token2)
       .send(testTrips.tripWithOutDuration);
 
     expect(res.statusCode).toEqual(400);
@@ -81,7 +96,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Fails with duration type is invalid (String) ', async () => {
     const res = await api
       .post('/api/trips')
-      .set('Authorization', 'Bearer ' + token)
+      .set('Authorization', 'Bearer ' + token2)
       .send(testTrips.tripDurationIsString);
 
     expect(res.statusCode).toEqual(400);
@@ -92,7 +107,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Creating trip only required properties -> default properties gets created ', async () => {
     const res = await api
       .post('/api/trips')
-      .set('Authorization', 'Bearer ' + token)
+      .set('Authorization', 'Bearer ' + token2)
       .send(testTrips.okTripWithOnlyRequiredFields);
 
     expect(res.statusCode).toEqual(201);
@@ -110,7 +125,7 @@ describe('TESTS FOR CREATING A NEW TRIP', () => {
   test('Creating trip with extra properties -> extra properties are not included', async () => {
     const res = await api
       .post('/api/trips')
-      .set('Authorization', 'Bearer ' + token)
+      .set('Authorization', 'Bearer ' + token2)
       .send(testTrips.okTripWithExtraFields);
 
     expect(res.statusCode).toEqual(201);
