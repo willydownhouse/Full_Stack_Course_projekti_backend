@@ -7,6 +7,7 @@
 6.1.22: Request objektiin sain lisätty userId avaimen, 2,5h
 8.1.22: only for admin middleware, userRoutes, 3h
 9.1.22: testien korjausta, 2h
+10.1.22: booking ja review routes, 4,5h
 
 Yhteensä:
-39,5h
+44h

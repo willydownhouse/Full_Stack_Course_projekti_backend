@@ -22,6 +22,7 @@ const bookingSchema = new Schema({
       values: ['booked', 'paid', 'cancelled'],
       message: '{VALUE} is not supported',
     },
+    default: 'booked',
   },
 });
 

@@ -7,11 +7,13 @@ import {
   errorController,
   unknownEndpoint,
 } from './controllers/errorController';
-import tripRouter from './routes/tripRoutes';
+import tripRouter from './routes/tripRouter';
 import testRouter from './routes/testRouter';
 import signupRouter from './routes/signupRouter';
 import loginRouter from './routes/loginRouter';
 import userRouter from './routes/userRouter';
+import bookingRouter from './routes/bookingRouter';
+import reviewRouter from './routes/reviewRouter';
 
 const app: Application = express();
 
@@ -35,6 +37,8 @@ app.use('/api/signup', signupRouter);
 app.use('/api/login', loginRouter);
 app.use('/api/trips', tripRouter);
 app.use('/api/users', userRouter);
+app.use('/api/bookings', bookingRouter);
+app.use('/api/reviews', reviewRouter);
 
 app.use(unknownEndpoint);
 app.use(errorController);

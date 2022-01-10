@@ -14,18 +14,23 @@ export const errorController = (
     err.name === 'CastError' ||
     err.name === 'Error'
   ) {
-    res.status(400).json({
+    return res.status(400).json({
       status: 'fail',
       message: err.message,
     });
   } else if (err.name === 'JsonWebTokenError') {
-    res.status(401).json({
+    return res.status(401).json({
       status: 'error',
       message: err.message,
     });
+  } else if (err.name === 'TokenExpiredError') {
+    return res.status(401).json({
+      status: 'error',
+      message: `${err.message}, please login again.`,
+    });
   }
 
-  next(err);
+  return next(err);
 };
 
 export const unknownEndpoint = (_: Request, res: Response) => {
