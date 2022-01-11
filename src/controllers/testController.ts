@@ -1,7 +1,6 @@
 import Trip from '../models/tripModel';
 import User from '../models/userModel';
 import { Request, Response } from 'express';
-//import bcrypt from 'bcrypt';
 
 export const resetDatabase = async (_: Request, res: Response) => {
   await Trip.deleteMany({});

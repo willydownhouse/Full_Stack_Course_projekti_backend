@@ -2,14 +2,14 @@ import mongoose, { Schema } from 'mongoose';
 import IReview from '../interfaces/review';
 
 const reviewSchema = new Schema({
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: 'User',
     required: true,
   },
-  tripId: {
+  trip: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'trip',
+    ref: 'Trip',
     required: true,
   },
   text: {

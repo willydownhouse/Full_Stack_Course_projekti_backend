@@ -5,7 +5,10 @@ import IReview from '../interfaces/review';
 import { Request, Response } from 'express';
 
 const getAll = async (req: Request, res: Response) => {
-  const reviews: IReview[] = await Review.find(req.query);
+  const reviews: IReview[] = await Review.find(req.query).populate(
+    'user',
+    'name -_id'
+  );
 
   res.status(200).json({
     docs: reviews.length,
@@ -13,7 +16,9 @@ const getAll = async (req: Request, res: Response) => {
   });
 };
 const getOne = async (req: Request, res: Response) => {
-  const review: IReview | null = await Review.findById({ _id: req.params.id });
+  const review: IReview | null = await Review.findById({
+    _id: req.params.id,
+  }).populate('user', 'name -_id');
 
   if (!review) {
     return res.status(400).json({
@@ -25,14 +30,14 @@ const getOne = async (req: Request, res: Response) => {
   return res.status(200).json(review);
 };
 const create = async (req: Request, res: Response) => {
-  if (!req.body.tripId) {
-    return res.status(401).json({
+  if (!req.body.trip) {
+    return res.status(400).json({
       status: 'fail',
       message: 'Please choose a trip for your review',
     });
   }
 
-  const trip: ITrip | null = await Trip.findById(req.body.tripId);
+  const trip: ITrip | null = await Trip.findById(req.body.trip);
 
   if (!trip) {
     return res.status(400).json({
@@ -42,8 +47,8 @@ const create = async (req: Request, res: Response) => {
   }
 
   const alreadyReviewedThisTrip: IReview | null = await Review.findOne({
-    userId: req.user?.id,
-    tripId: trip.id,
+    user: req.user?.id,
+    trip: trip.id,
   });
 
   if (alreadyReviewedThisTrip) {
@@ -54,9 +59,9 @@ const create = async (req: Request, res: Response) => {
   }
 
   const review: IReview = await Review.create({
-    userId: req.user?.id,
+    user: req.user?.id,
     createdAt: new Date().toISOString(),
-    tripId: trip.id,
+    trip: trip.id,
     ...req.body,
   });
 

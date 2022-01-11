@@ -3,9 +3,12 @@ import IBooking from '../interfaces/booking';
 import Trip from '../models/tripModel';
 import ITrip from '../interfaces/trip';
 import { Request, Response } from 'express';
+import { checkedReqBody, checkBookingReqBody } from '../typeguards/booking';
 
 const getAll = async (req: Request, res: Response) => {
-  const bookings: IBooking[] = await Booking.find(req.query);
+  const bookings: IBooking[] = await Booking.find(req.query)
+    .populate('user', 'name email -_id')
+    .populate('trip', 'name -_id');
 
   res.status(200).json({
     docs: bookings.length,
@@ -25,39 +28,40 @@ const getOne = async (req: Request, res: Response) => {
   return res.status(200).json(booking);
 };
 const create = async (req: Request, res: Response) => {
-  if (!req.body.tripId) {
-    return res.status(401).json({
-      status: 'fail',
-      message: 'Please choose a trip for your booking',
-    });
-  }
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  const { trip, trip_date }: checkedReqBody = checkBookingReqBody(req.body);
 
-  const trip: ITrip | null = await Trip.findById(req.body.tripId);
+  const tripExists: ITrip | null = await Trip.findOne({
+    _id: trip,
+    startDates: trip_date,
+  });
 
-  if (!trip) {
+  if (!tripExists) {
     return res.status(400).json({
       status: 'fail',
-      message: 'No trip with that ID',
+      message: 'No trip found with that ID and trip date',
     });
   }
 
   const alreadyBookedForThisTrip: IBooking | null = await Booking.findOne({
-    tripId: trip.id,
-    userId: req.user?.id,
+    trip: trip,
+    user: req.user?.id,
+    trip_date,
   });
 
   if (alreadyBookedForThisTrip) {
     return res.status(400).json({
       status: 'fail',
-      message: 'You have already booking for this trip',
+      message: 'You have already booked for this trip',
     });
   }
 
   const booking: IBooking = await Booking.create({
-    userId: req.user?.id,
-    status: 'booked',
+    user: req.user?.id,
+    trip,
+    trip_date,
     createdAt: new Date().toISOString(),
-    tripId: trip.id,
+    status: 'booked',
   });
 
   return res.status(201).json(booking);

@@ -2,15 +2,19 @@ import mongoose, { Schema } from 'mongoose';
 import IBooking from '../interfaces/booking';
 
 const bookingSchema = new Schema({
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'user',
+    ref: 'User',
     required: true,
   },
-  tripId: {
+  trip: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'trip',
+    ref: 'Trip',
     required: true,
+  },
+  trip_date: {
+    type: String,
+    required: [true, 'Booking must have a  trip date'],
   },
   createdAt: {
     type: Date,

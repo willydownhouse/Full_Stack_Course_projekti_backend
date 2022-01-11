@@ -8,6 +8,7 @@
 8.1.22: only for admin middleware, userRoutes, 3h
 9.1.22: testien korjausta, 2h
 10.1.22: booking ja review routes, 4,5h
+11.1.22: booking ja review routejen säätöä ja testit, 4h
 
 Yhteensä:
-44h
+48h
