@@ -10,5 +10,13 @@
 10.1.22: booking ja review routes, 4,5h
 11.1.22: booking ja review routejen säätöä ja testit, 4h
 
-Yhteensä:
 48h
+
+12.2.22: react frontend repo alustus, reduxilla eka action toimimaan, 4h
+14.1.22: fronttiin mainpagea, navigointia ja tyylejä, 7h
+16.1.22: hamburger/sidemenua, 3h
+
+14h
+
+Yhteensä:
+62h

@@ -33,7 +33,7 @@ describe('TESTS FOR UPDATING A TRIP', () => {
   });
   test('Does not work without a token', async () => {
     const updatedTrip = await api
-      .patch(`/api/trips/${res.body.data[0]._id}`)
+      .patch(`/api/trips/${res.body.trips[0]._id}`)
       .send({
         name: 'Trip name gets updated',
       });
@@ -42,7 +42,7 @@ describe('TESTS FOR UPDATING A TRIP', () => {
   });
   test('Does not work if role is user', async () => {
     const updatedTrip = await api
-      .patch(`/api/trips/${res.body.data[0]._id}`)
+      .patch(`/api/trips/${res.body.trips[0]._id}`)
       .set('Authorization', 'Bearer ' + token2)
       .send({
         name: 'Trip name update2',
@@ -57,7 +57,7 @@ describe('TESTS FOR UPDATING A TRIP', () => {
   });
   test('Trip name gets updated', async () => {
     const updatedTrip = await api
-      .patch(`/api/trips/${res.body.data[0]._id}`)
+      .patch(`/api/trips/${res.body.trips[0]._id}`)
       .set('Authorization', 'Bearer ' + token)
       .send({
         name: 'Trip name gets updated',
@@ -69,7 +69,7 @@ describe('TESTS FOR UPDATING A TRIP', () => {
 
   test('Updating fails with invalid name type (number)', async () => {
     const updatedTrip = await api
-      .patch(`/api/trips/${res.body.data[0]._id}`)
+      .patch(`/api/trips/${res.body.trips[0]._id}`)
       .set('Authorization', 'Bearer ' + token)
       .send({
         name: 423423,
@@ -80,7 +80,7 @@ describe('TESTS FOR UPDATING A TRIP', () => {
   });
   test('Updates only the properties that trip model include (name, duration, location) in this case', async () => {
     const updatedTrip = await api
-      .patch(`/api/trips/${res.body.data[1]._id}`)
+      .patch(`/api/trips/${res.body.trips[1]._id}`)
       .set('Authorization', 'Bearer ' + token)
       .send({
         name: 'Dont update properties that does not exist',

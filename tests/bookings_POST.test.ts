@@ -28,7 +28,7 @@ describe('CREATE BOOKING', () => {
 
   test('Does not work without authentication', async () => {
     const booking = await api.post('/api/bookings').send({
-      trip: res.body.data[0]._id as string,
+      trip: res.body.trips[0]._id as string,
       trip_date: '1/2/22',
     });
 
@@ -39,7 +39,7 @@ describe('CREATE BOOKING', () => {
       .post('/api/bookings')
       .set('Authorization', `Bearer ${token}`)
       .send({
-        trip: res.body.data[0]._id as string,
+        trip: res.body.trips[0]._id as string,
         trip_date: '1/2/22',
       });
 
@@ -50,7 +50,7 @@ describe('CREATE BOOKING', () => {
       .post('/api/bookings')
       .set('Authorization', `Bearer ${token}`)
       .send({
-        trip: res.body.data[0]._id as string,
+        trip: res.body.trips[0]._id as string,
         trip_date: '1/2/22',
       });
 
@@ -62,7 +62,7 @@ describe('CREATE BOOKING', () => {
       .post('/api/bookings')
       .set('Authorization', `Bearer ${token}`)
       .send({
-        trip: res.body.data[1]._id as string,
+        trip: res.body.trips[1]._id as string,
         trip_date: '1/4/22',
       });
 

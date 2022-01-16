@@ -31,15 +31,15 @@ describe('GET REQUESTS FOR TRIPS', () => {
   test('GET all trips', async () => {
     const res = await api.get('/api/trips');
 
-    expect(res.body.data.length).toBe(2);
-    expect(res.body.data[0].name).toBe('Finale MTB week');
-    expect(res.body.data[1].name).toBe('Lyngen Ski week');
+    expect(res.body.trips.length).toBe(2);
+    expect(res.body.trips[0].name).toBe('Finale MTB week');
+    expect(res.body.trips[1].name).toBe('Lyngen Ski week');
   });
 
   test('Get one trip by ID', async () => {
     const res = await api.get('/api/trips');
 
-    const resOneTrip = await api.get(`/api/trips/${res.body.data[0]._id}`);
+    const resOneTrip = await api.get(`/api/trips/${res.body.trips[0]._id}`);
 
     expect(resOneTrip.statusCode).toEqual(200);
     expect(resOneTrip.body.name).toBe('Finale MTB week');
@@ -58,7 +58,7 @@ describe('DELETE REQUESTS FOR TRIPS', () => {
     const res = await api.get('/api/trips');
 
     const resFromDelete = await api.delete(
-      `/api/trips/${res.body.data[0]._id}`
+      `/api/trips/${res.body.trips[0]._id}`
     );
 
     expect(resFromDelete.statusCode).toEqual(401);
@@ -67,7 +67,7 @@ describe('DELETE REQUESTS FOR TRIPS', () => {
     const res = await api.get('/api/trips');
 
     const resFromDelete = await api
-      .delete(`/api/trips/${res.body.data[0]._id}`)
+      .delete(`/api/trips/${res.body.trips[0]._id}`)
       .set('Authorization', 'Bearer ' + token);
 
     expect(resFromDelete.statusCode).toEqual(401);
@@ -79,16 +79,16 @@ describe('DELETE REQUESTS FOR TRIPS', () => {
     const res = await api.get('/api/trips');
 
     const resFromDelete = await api
-      .delete(`/api/trips/${res.body.data[0]._id}`)
+      .delete(`/api/trips/${res.body.trips[0]._id}`)
       .set('Authorization', 'Bearer ' + token2);
 
     const resAfterDeleteGetAllTrips = await api.get('/api/trips');
 
     const resAfterDeleteGetOneTrip = await api.get(
-      `/api/trips/${res.body.data[0]._id}`
+      `/api/trips/${res.body.trips[0]._id}`
     );
 
-    expect(resAfterDeleteGetAllTrips.body.data.length).toBe(1);
+    expect(resAfterDeleteGetAllTrips.body.trips.length).toBe(1);
     expect(resFromDelete.statusCode).toEqual(204);
     expect(resAfterDeleteGetOneTrip.statusCode).toEqual(400);
     expect(resAfterDeleteGetOneTrip.body.message).toBe(

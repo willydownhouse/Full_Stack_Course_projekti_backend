@@ -28,7 +28,7 @@ describe('CREATE REVIEW', () => {
 
   test('Does not work without authentication', async () => {
     const review = await api.post('/api/reviews').send({
-      trip: res.body.data[0]._id as string,
+      trip: res.body.trips[0]._id as string,
     });
 
     expect(review.statusCode).toBe(401);
@@ -38,7 +38,7 @@ describe('CREATE REVIEW', () => {
       .post('/api/reviews')
       .set('Authorization', `Bearer ${token}`)
       .send({
-        trip: res.body.data[0]._id as string,
+        trip: res.body.trips[0]._id as string,
         rating: 4,
         text: 'Amazing',
       });
@@ -50,7 +50,7 @@ describe('CREATE REVIEW', () => {
       .post('/api/reviews')
       .set('Authorization', `Bearer ${token}`)
       .send({
-        trip: res.body.data[0]._id as string,
+        trip: res.body.trips[0]._id as string,
         rating: 4.6,
         text: 'Lets try again',
       });
@@ -64,7 +64,7 @@ describe('CREATE REVIEW', () => {
       .post('/api/reviews')
       .set('Authorization', `Bearer ${token}`)
       .send({
-        trip: res.body.data[1]._id as string,
+        trip: res.body.trips[1]._id as string,
         text: 'Yeah!',
       });
 
@@ -78,7 +78,7 @@ describe('CREATE REVIEW', () => {
       .post('/api/reviews')
       .set('Authorization', `Bearer ${token}`)
       .send({
-        trip: res.body.data[1]._id as string,
+        trip: res.body.trips[1]._id as string,
         rating: 3,
       });
 

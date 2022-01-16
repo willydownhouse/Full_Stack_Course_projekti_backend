@@ -1,7 +1,8 @@
 import express, { Application } from 'express';
 import mongoose from 'mongoose';
 import 'express-async-errors';
-
+import cors from 'cors';
+import morgan from 'morgan';
 import config from './utils/config';
 import {
   errorController,
@@ -18,6 +19,7 @@ import reviewRouter from './routes/reviewRouter';
 const app: Application = express();
 
 app.use(express.json());
+app.use(cors());
 
 const db = config.DB_CONNECTION || 'db';
 
@@ -30,6 +32,9 @@ mongoose
     console.log('There was a problem connecting to database ');
   });
 
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
 if (process.env.NODE_ENV === 'test') {
   app.use('/api/testing', testRouter);
 }

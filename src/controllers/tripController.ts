@@ -8,7 +8,7 @@ const getAllTrips = async (req: Request, res: Response) => {
 
   res.status(200).json({
     docs: trips.length,
-    data: trips,
+    trips,
   });
 };
 
