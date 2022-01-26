@@ -21,7 +21,12 @@ const app: Application = express();
 app.use(express.json());
 app.use(cors());
 
-const db = config.DB_CONNECTION || 'db';
+console.log('ENVIRONMENT:');
+console.log(process.env.NODE_ENV);
+
+app.use(express.static('./build.ui'));
+
+const db = config.DB_CONNECTION as string;
 
 mongoose
   .connect(db)
@@ -44,6 +49,10 @@ app.use('/api/trips', tripRouter);
 app.use('/api/users', userRouter);
 app.use('/api/bookings', bookingRouter);
 app.use('/api/reviews', reviewRouter);
+
+app.get('/healthcheck', (_, res) => {
+  res.send('ok 1');
+});
 
 app.use(unknownEndpoint);
 app.use(errorController);

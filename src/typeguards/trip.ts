@@ -1,6 +1,7 @@
 import moment, { MomentInput } from 'moment';
 import { isString } from './utils';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const typeChecksToReqBody = (reqbody: any): any => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const { name, startDates, description } = reqbody;

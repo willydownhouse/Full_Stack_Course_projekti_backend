@@ -15,8 +15,15 @@
 12.2.22: react frontend repo alustus, reduxilla eka action toimimaan, 4h
 14.1.22: fronttiin mainpagea, navigointia ja tyylejä, 7h
 16.1.22: hamburger/sidemenua, 3h
+17.1.22: menu kuntoon, mtb ja ski -trips sivujen ulkoasua, 7h
+18.1.22: ski ja trips sivujen ulkoasu, review action ja reducer, 3,5h
+19.1.22: kuvien lataaminen kuntoon, login formille modalia, 7,5h
+20.1.22: login kuntoon, 5h
+23.1.22: login validation yupilla,loginin aiheuttamia vaikutuksia muihin komponentteihin, 2h
+24.1.22: programmatic navigation with @lagunovsky/redux-react-router library, 2h
+26.1.22: npm skriptejä produktion buildia varten, cypressillä ekoja testejä, 8h
 
-14h
+49h
 
 Yhteensä:
-62h
+89h

@@ -1,1 +1,4 @@
 build
+tests
+cypress
+jest.config.ts

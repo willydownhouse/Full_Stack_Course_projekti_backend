@@ -20,7 +20,7 @@ const signUp = async (req: Request, res: Response) => {
     role: 'user',
   });
 
-  res.status(201).json(user);
+  return res.status(201).json(user);
 };
 
 const login = async (req: Request, res: Response) => {
@@ -29,22 +29,28 @@ const login = async (req: Request, res: Response) => {
 
   const user: IUser | null = await User.findOne({ email }).select('password');
 
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    res.status(401).json({
+  if (!user) {
+    return res.status(401).json({
       status: 'fail',
       message: 'Wrong email or password',
     });
   }
 
-  if (user) {
-    const token = jwt.sign({ id: user.id }, config.JWT_SECRET as string, {
-      expiresIn: config.JWT_EXPIRES_IN,
-    });
-
-    res.status(200).json({
-      token,
+  if (!(await bcrypt.compare(password, user.password))) {
+    return res.status(401).json({
+      status: 'fail',
+      message: 'Wrong email or password',
     });
   }
+
+  const token = jwt.sign({ id: user.id }, config.JWT_SECRET as string, {
+    expiresIn: config.JWT_EXPIRES_IN,
+  });
+
+  return res.status(200).json({
+    token,
+    user: user.id,
+  });
 };
 
 const protect = async (req: Request, res: Response, next: NextFunction) => {
