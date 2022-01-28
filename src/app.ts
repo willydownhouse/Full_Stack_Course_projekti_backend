@@ -49,11 +49,11 @@ app.use('/api/bookings', bookingRouter);
 app.use('/api/reviews', reviewRouter);
 
 app.get('/health', (_, res) => {
-  res.send('healthcheck o');
+  res.send('healthcheck ok');
 });
 
 app.get('/version', (_, res) => {
-  res.send('v6');
+  res.send('v9');
 });
 
 app.use(unknownEndpoint);
