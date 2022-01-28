@@ -22,5 +22,5 @@
 
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "exclude": ["tests", "cypress", "jest.config.ts"]
+  "exclude": ["tests", "jest.config.ts"]
 }
