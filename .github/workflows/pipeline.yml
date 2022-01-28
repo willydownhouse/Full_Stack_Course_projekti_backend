@@ -17,6 +17,8 @@ jobs:
         run: npm install
       - name: lint
         run: npm run lint
+      - name: build
+        run: npm run build:back
       - name: test
         run: npm run test
         env:
