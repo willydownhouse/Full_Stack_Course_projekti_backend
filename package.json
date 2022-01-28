@@ -11,9 +11,7 @@
     "start:prod": "NODE_ENV=production node build/index.js",
     "start:dev": "NODE_ENV=development nodemon src/index.ts",
     "lint": "eslint --ext .ts .",
-    "test": "NODE_ENV=test jest --verbose --runInBand",
-    "test:e2e": "NODE_ENV=test node build/index.js",
-    "cypress:open": "cypress open"
+    "test": "NODE_ENV=test jest --verbose --runInBand"
   },
   "keywords": [],
   "author": "",
@@ -32,7 +30,6 @@
     "@types/supertest": "^2.0.11",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
-    "cypress": "^9.3.1",
     "eslint": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
     "jest": "^27.4.5",

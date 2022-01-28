@@ -21,3 +21,5 @@ jobs:
         run: npm run test
         env:
           DB_CONNECTION_TEST: ${{secrets.DB_CONNECTION_TEST}}
+          JWT_SECRET: ${{secrets.JWT_SECRET}}
+          JWT_EXPIRES_IN: ${{secrets.JWT_EXPIRES_IN}}
