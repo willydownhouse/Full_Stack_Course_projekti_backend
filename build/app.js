@@ -18,7 +18,6 @@ const userRouter_1 = __importDefault(require("./routes/userRouter"));
 const bookingRouter_1 = __importDefault(require("./routes/bookingRouter"));
 const reviewRouter_1 = __importDefault(require("./routes/reviewRouter"));
 const app = (0, express_1.default)();
-//app.use(express.static('build.ui'));
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 console.log('ENVIRONMENT:');
