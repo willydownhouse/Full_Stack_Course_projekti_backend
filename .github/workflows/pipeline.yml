@@ -23,3 +23,9 @@ jobs:
           DB_CONNECTION_TEST: ${{secrets.DB_CONNECTION_TEST}}
           JWT_SECRET: ${{secrets.JWT_SECRET}}
           JWT_EXPIRES_IN: ${{secrets.JWT_EXPIRES_IN}}
+      - name: debloy
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'powerful-mountain-41188'
+          heroku_email: 'ville.l.alatalo@gmail.com'
