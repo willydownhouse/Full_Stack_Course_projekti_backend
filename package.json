@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build:ui": "rm -rf build.ui && cd ../front && rm -rf build.ui && npm run build && mv build build.ui && cp -r build.ui ../back",
-    "build:back": "tsc",
     "build:full": "npm run build:back && npm run build:ui",
     "build:start:prod": "npm run build:full && NODE_ENV=production node build/index.js",
+    "build:back": "tsc",
     "start:prod": "NODE_ENV=production node build/index.js",
     "start:dev": "NODE_ENV=development nodemon src/index.ts",
     "lint": "eslint --ext .ts .",

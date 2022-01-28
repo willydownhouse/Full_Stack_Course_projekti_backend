@@ -22,8 +22,9 @@
 23.1.22: login validation yupilla,loginin aiheuttamia vaikutuksia muihin komponentteihin, 2h  
 24.1.22: programmatic navigation with @lagunovsky/redux-react-router library, 2h  
 26.1.22: npm skriptejä produktion buildia varten, cypressillä ekoja testejä, 8h
+27.1.22: notification component, development/produktion ympäristöjen säätöä, 3h
 
-49h
+52h
 
 Yhteensä:  
 97h

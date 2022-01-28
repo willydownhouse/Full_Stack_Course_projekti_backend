@@ -24,8 +24,6 @@ app.use(cors());
 console.log('ENVIRONMENT:');
 console.log(process.env.NODE_ENV);
 
-app.use(express.static('./build.ui'));
-
 const db = config.DB_CONNECTION as string;
 
 mongoose
@@ -50,7 +48,7 @@ app.use('/api/users', userRouter);
 app.use('/api/bookings', bookingRouter);
 app.use('/api/reviews', reviewRouter);
 
-app.get('/healthcheck', (_, res) => {
+app.get('/health', (_, res) => {
   res.send('ok 1');
 });
 

@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.typeChecksToReqBody = void 0;
 const moment_1 = __importDefault(require("moment"));
 const utils_1 = require("./utils");
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const typeChecksToReqBody = (reqbody) => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const { name, startDates, description } = reqbody;
