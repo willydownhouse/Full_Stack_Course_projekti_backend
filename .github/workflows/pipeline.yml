@@ -30,4 +30,6 @@ jobs:
           heroku_app_name: 'powerful-mountain-41188'
           heroku_email: 'ville.l.alatalo@gmail.com'
         env:
-          DB_CONNECTION: ${{secrets.DB_CONNECTION}}
+          HD_DB_CONNECTION: ${{secrets.DB_CONNECTION}}
+          HD_JWT_SECRET: ${{secrets.JWT_SECRET}}
+          HD_JWT_EXPIRES_IN: ${{secrets.JWT_EXPIRES_IN}}
