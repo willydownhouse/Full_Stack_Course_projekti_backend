@@ -29,6 +29,9 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'powerful-mountain-41188'
           heroku_email: 'ville.l.alatalo@gmail.com'
+           healthcheck: 'https://powerful-mountain-41188.herokuapp.com/health'
+          checkstring: 'healthcheck ok'
+          rollbackonhealthcheckfailed: true
         env:
           HD_DB_CONNECTION: ${{secrets.DB_CONNECTION}}
           HD_JWT_SECRET: ${{secrets.JWT_SECRET}}
