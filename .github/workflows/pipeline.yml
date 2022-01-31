@@ -26,6 +26,7 @@ jobs:
           JWT_SECRET: ${{secrets.JWT_SECRET}}
           JWT_EXPIRES_IN: ${{secrets.JWT_EXPIRES_IN}}
       - name: debloy
+        if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, 'skip')}}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
