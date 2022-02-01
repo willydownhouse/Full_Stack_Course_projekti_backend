@@ -5,10 +5,9 @@ import IReview from '../interfaces/review';
 import { Request, Response } from 'express';
 
 const getAll = async (req: Request, res: Response) => {
-  const reviews: IReview[] = await Review.find(req.query).populate(
-    'user',
-    'name -_id'
-  );
+  const reviews: IReview[] = await Review.find(req.query)
+    .populate('user', 'name -_id')
+    .populate('trip', 'name -_id');
 
   res.status(200).json({
     docs: reviews.length,

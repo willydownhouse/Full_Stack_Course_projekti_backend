@@ -5,6 +5,17 @@ import ITrip from '../interfaces/trip';
 import { Request, Response } from 'express';
 import { checkedReqBody, checkBookingReqBody } from '../typeguards/booking';
 
+const getAllForLoggedInUser = async (req: Request, res: Response) => {
+  const bookings: IBooking[] = await Booking.find({ user: req.user?.id })
+    .populate('user', 'name email -_id')
+    .populate('trip', 'name -_id');
+
+  return res.status(200).json({
+    docs: bookings.length,
+    bookings,
+  });
+};
+
 const getAll = async (req: Request, res: Response) => {
   const bookings: IBooking[] = await Booking.find(req.query)
     .populate('user', 'name email -_id')
@@ -15,6 +26,7 @@ const getAll = async (req: Request, res: Response) => {
     bookings,
   });
 };
+
 const getOne = async (req: Request, res: Response) => {
   const booking: IBooking | null = await Booking.findById(req.params.id);
 
@@ -104,4 +116,5 @@ export default {
   create,
   update,
   deleteBooking,
+  getAllForLoggedInUser,
 };

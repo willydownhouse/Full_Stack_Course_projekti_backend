@@ -21,12 +21,14 @@
 20.1.22: login kuntoon, 5h  
 23.1.22: login validation yupilla,loginin aiheuttamia vaikutuksia muihin komponentteihin, 2h  
 24.1.22: programmatic navigation with @lagunovsky/redux-react-router library, 2h  
-26.1.22: npm skriptejä produktion buildia varten, cypressillä ekoja testejä, 8h
-27.1.22: notification component, development/produktion ympäristöjen säätöä, 3h
-28.1.22: backend pipeline github actions, 2,5h
+26.1.22: npm skriptejä produktion buildia varten, cypressillä ekoja testejä, 8h  
+27.1.22: notification component, development/produktion ympäristöjen säätöä, 3h  
+28.1.22: backend pipeline github actions, 2,5h  
 30.1.22: frontend pipeline github actions, 8,5h
+31.1.22: signup form, cypress testejä, mypage, 8h
+1.2.22: myPage,pari uutta reittiä backkiin ja testit niille, 8h
 
-63h
+79h
 
 Yhteensä:  
-111h
+127h

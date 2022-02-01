@@ -53,7 +53,7 @@ app.get('/health', (_, res) => {
 });
 
 app.get('/version', (_, res) => {
-  res.send('v9');
+  res.send('v12');
 });
 
 app.use(unknownEndpoint);

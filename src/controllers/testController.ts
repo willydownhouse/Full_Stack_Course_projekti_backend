@@ -1,10 +1,14 @@
 import Trip from '../models/tripModel';
 import User from '../models/userModel';
+import Booking from '../models/bookingModel';
+import Review from '../models/reviewModel';
 import { Request, Response } from 'express';
 
 export const resetDatabase = async (_: Request, res: Response) => {
   await Trip.deleteMany({});
   await User.deleteMany({});
+  await Booking.deleteMany({});
+  await Review.deleteMany({});
 
   res.status(204).end();
 };
@@ -47,6 +51,10 @@ export const initDataBase = async (_: Request, res: Response) => {
     email: 'ville@test.fi',
     password: 'test1234',
     confirmPassword: 'test1234',
+    name: {
+      first_name: 'ville',
+      last_name: 'kristian',
+    },
   });
   const user2 = new User({
     email: 'admin@test.fi',

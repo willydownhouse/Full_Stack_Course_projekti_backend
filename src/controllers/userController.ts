@@ -7,7 +7,7 @@ const getAllUsers = async (req: Request, res: Response) => {
 
   res.status(200).json({
     docs: users.length,
-    data: users,
+    users,
   });
 };
 
@@ -65,10 +65,19 @@ const deleteUser = async (req: Request, res: Response) => {
   return res.status(204).end();
 };
 
+export const checkIfUserExists = async (req: Request, res: Response) => {
+  const user: IUser | null = await User.findOne({ _id: req.params.id });
+
+  res.status(200).json({
+    user: user ? true : false,
+  });
+};
+
 export default {
   getAllUsers,
   createUser,
   getOneUser,
   deleteUser,
   updateUser,
+  checkIfUserExists,
 };

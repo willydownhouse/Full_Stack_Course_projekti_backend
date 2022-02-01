@@ -12,6 +12,7 @@ beforeAll(async () => {
 
 let token: string;
 let token2: string;
+let resUsers: any;
 
 describe('USER TESTS', () => {
   beforeAll(async () => {
@@ -35,13 +36,22 @@ describe('USER TESTS', () => {
     expect(res.statusCode).toBe(401);
   });
   test('Admin access users', async () => {
-    const res = await api
+    resUsers = await api
       .get('/api/users')
       .set('Authorization', `Bearer ${token2}`);
 
-    console.log(res.body);
+    console.log(resUsers.body.users);
+
+    expect(resUsers.statusCode).toBe(200);
+    expect(resUsers.body.users.length).toBe(2);
+  });
+  test('User exist route', async () => {
+    const res = await api.get(
+      `/api/users/${resUsers.body.users[1]._id}/exists`
+    );
+
     expect(res.statusCode).toBe(200);
-    expect(res.body.data.length).toBe(2);
+    expect(res.body.user).toBe(true);
   });
 });
 
