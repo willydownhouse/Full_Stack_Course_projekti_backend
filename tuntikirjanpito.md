@@ -27,8 +27,10 @@
 30.1.22: frontend pipeline github actions, 8,5h
 31.1.22: signup form, cypress testejä, mypage, 8h
 1.2.22: myPage,pari uutta reittiä backkiin ja testit niille, 8h
+2.2.22: kaikkea pientä säätöä ja booking formin aloitus, 6h  
+3.2.22: booking formia, 2,5h
 
-79h
+87,5h
 
 Yhteensä:  
-127h
+135,5h
