@@ -1,3 +1,5 @@
+Päivämäärä, mitä tuli tehtyä, tunnit
+
 29.12.21: Projektin aloitus, ensimmäisen modelin suunnittelu(trip) ja ekat routet sille, työaika 7h  
 30.12.21: Trip routeille kirjoitettu testejä, 6h  
 2.1.22: userModel, interface IUser, lisää typechekkejä uuden tripin lisäykseen, 3h  
@@ -26,11 +28,12 @@
 28.1.22: backend pipeline github actions, 2,5h  
 30.1.22: frontend pipeline github actions, 8,5h
 31.1.22: signup form, cypress testejä, mypage, 8h
-1.2.22: myPage,pari uutta reittiä backkiin ja testit niille, 8h
+1.2.22: myPage,pari uutta reittiä backkiin ja testit niille, 8h  
 2.2.22: kaikkea pientä säätöä ja booking formin aloitus, 6h  
-3.2.22: booking formia, 2,5h
+3.2.22: booking formia, 2,5h  
+7.2.22: book -action ja bäkkiin emailin lähetys onnistuneesta buukkauksesta, 5h
 
-87,5h
+92,5h
 
 Yhteensä:  
 135,5h

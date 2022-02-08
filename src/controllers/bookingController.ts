@@ -4,11 +4,17 @@ import Trip from '../models/tripModel';
 import ITrip from '../interfaces/trip';
 import { Request, Response } from 'express';
 import { checkedReqBody, checkBookingReqBody } from '../typeguards/booking';
+import {
+  sendConfirmationEmailToCustomer,
+  sendEmailAboutNewBookingToAdmin,
+} from '../utils/email';
+import config from '../utils/config';
 
 const getAllForLoggedInUser = async (req: Request, res: Response) => {
   const bookings: IBooking[] = await Booking.find({ user: req.user?.id })
     .populate('user', 'name email -_id')
-    .populate('trip', 'name -_id');
+    .populate('trip', 'name -_id')
+    .sort('-createdAt');
 
   return res.status(200).json({
     docs: bookings.length,
@@ -64,7 +70,8 @@ const create = async (req: Request, res: Response) => {
   if (alreadyBookedForThisTrip) {
     return res.status(400).json({
       status: 'fail',
-      message: 'You have already booked for this trip',
+      message:
+        'You have already booked this trip with this date, please choose another trip or date',
     });
   }
 
@@ -75,6 +82,24 @@ const create = async (req: Request, res: Response) => {
     createdAt: new Date().toISOString(),
     status: 'booked',
   });
+
+  if (config.NODE_ENV === 'development') {
+    // MAILTRAP
+    await sendConfirmationEmailToCustomer(
+      req.user?.email as string,
+      tripExists.name,
+      trip_date
+    );
+  }
+
+  if (config.NODE_ENV === 'production') {
+    await sendEmailAboutNewBookingToAdmin(
+      'adventure_buddy@outlook.com',
+      req.user?.email as string,
+      tripExists.name,
+      trip_date
+    );
+  }
 
   return res.status(201).json(booking);
 };

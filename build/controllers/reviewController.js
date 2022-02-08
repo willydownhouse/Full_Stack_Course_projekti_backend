@@ -15,7 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const reviewModel_1 = __importDefault(require("../models/reviewModel"));
 const tripModel_1 = __importDefault(require("../models/tripModel"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const reviews = yield reviewModel_1.default.find(req.query).populate('user', 'name -_id');
+    const reviews = yield reviewModel_1.default.find(req.query)
+        .populate('user', 'name -_id')
+        .populate('trip', 'name -_id');
     res.status(200).json({
         docs: reviews.length,
         reviews,

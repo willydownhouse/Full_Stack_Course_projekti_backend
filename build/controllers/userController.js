@@ -12,12 +12,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.checkIfUserExists = void 0;
 const userModel_1 = __importDefault(require("../models/userModel"));
 const getAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield userModel_1.default.find(req.query);
     res.status(200).json({
         docs: users.length,
-        data: users,
+        users,
     });
 });
 const getOneUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -61,10 +62,18 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
     return res.status(204).end();
 });
+const checkIfUserExists = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield userModel_1.default.findOne({ _id: req.params.id });
+    res.status(200).json({
+        user: user ? true : false,
+    });
+});
+exports.checkIfUserExists = checkIfUserExists;
 exports.default = {
     getAllUsers,
     createUser,
     getOneUser,
     deleteUser,
     updateUser,
+    checkIfUserExists: exports.checkIfUserExists,
 };

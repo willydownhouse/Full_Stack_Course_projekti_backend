@@ -53,7 +53,7 @@ describe('USER TESTS', () => {
     expect(res.statusCode).toBe(200);
     expect(res.body.bookings).toHaveLength(2);
     expect(res.body.bookings[0].user.email).toBe('ville@test.fi');
-    expect(res.body.bookings[0].trip.name).toBe('Finale MTB week');
+    expect(res.body.bookings[0].trip.name).toBe('Lyngen Ski week');
   });
   test('Fails if not logged in', async () => {
     const res = await api.get(`/api/users/${id}/bookings`);

@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cors());
 
 console.log('ENVIRONMENT:');
-console.log(process.env.NODE_ENV);
+console.log(config.NODE_ENV);
 
 const db = config.DB_CONNECTION as string;
 
@@ -35,10 +35,10 @@ mongoose
     console.log('There was a problem connecting to database ');
   });
 
-if (process.env.NODE_ENV === 'development') {
+if (config.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-if (process.env.NODE_ENV === 'test') {
+if (config.NODE_ENV === 'test') {
   app.use('/api/testing', testRouter);
 }
 app.use('/api/signup', signupRouter);

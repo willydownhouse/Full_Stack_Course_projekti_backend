@@ -55,7 +55,9 @@ describe('CREATE BOOKING', () => {
       });
 
     expect(booking.statusCode).toBe(400);
-    expect(booking.body.message).toBe('You have already booked for this trip');
+    expect(booking.body.message).toBe(
+      'You have already booked this trip with this date, please choose another trip or date'
+    );
   });
   test('Fails if trip_date is not in trips startDates', async () => {
     const booking = await api

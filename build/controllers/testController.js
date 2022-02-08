@@ -15,9 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.initDataBase = exports.resetDatabase = void 0;
 const tripModel_1 = __importDefault(require("../models/tripModel"));
 const userModel_1 = __importDefault(require("../models/userModel"));
+const bookingModel_1 = __importDefault(require("../models/bookingModel"));
+const reviewModel_1 = __importDefault(require("../models/reviewModel"));
 const resetDatabase = (_, res) => __awaiter(void 0, void 0, void 0, function* () {
     yield tripModel_1.default.deleteMany({});
     yield userModel_1.default.deleteMany({});
+    yield bookingModel_1.default.deleteMany({});
+    yield reviewModel_1.default.deleteMany({});
     res.status(204).end();
 });
 exports.resetDatabase = resetDatabase;
@@ -58,6 +62,10 @@ const initDataBase = (_, res) => __awaiter(void 0, void 0, void 0, function* () 
         email: 'ville@test.fi',
         password: 'test1234',
         confirmPassword: 'test1234',
+        name: {
+            first_name: 'ville',
+            last_name: 'kristian',
+        },
     });
     const user2 = new userModel_1.default({
         email: 'admin@test.fi',
