@@ -39,3 +39,4 @@ jobs:
           HD_DB_CONNECTION: ${{secrets.DB_CONNECTION}}
           HD_JWT_SECRET: ${{secrets.JWT_SECRET}}
           HD_JWT_EXPIRES_IN: ${{secrets.JWT_EXPIRES_IN}}
+          HD_EMAIL_PASSWORD_PROD: ${{secrets.EMAIL_PASSWORD_PROD}}
