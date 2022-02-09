@@ -40,8 +40,6 @@ describe('USER TESTS', () => {
       .get('/api/users')
       .set('Authorization', `Bearer ${token2}`);
 
-    console.log(resUsers.body.users);
-
     expect(resUsers.statusCode).toBe(200);
     expect(resUsers.body.users.length).toBe(2);
   });

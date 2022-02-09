@@ -8,6 +8,8 @@ router.use(authController.protect);
 
 router.route('/').post(bookingController.create);
 
+router.route('/:id').delete(bookingController.deleteMyBooking);
+
 router.use(authController.restrictTo('admin'));
 
 router.route('/').get(bookingController.getAll);
@@ -15,7 +17,6 @@ router.route('/').get(bookingController.getAll);
 router
   .route('/:id')
   .get(bookingController.getOne)
-  .patch(bookingController.update)
-  .delete(bookingController.deleteBooking);
+  .patch(bookingController.update);
 
 export default router;

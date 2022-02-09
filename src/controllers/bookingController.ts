@@ -134,6 +134,29 @@ const deleteBooking = async (req: Request, res: Response) => {
 
   return res.status(204).end();
 };
+const deleteMyBooking = async (req: Request, res: Response) => {
+  const booking: IBooking | null = await Booking.findById({
+    _id: req.params.id,
+  });
+
+  if (!booking) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'No document with that ID',
+    });
+  }
+
+  if (booking.user == req.user?.id) {
+    await Booking.deleteOne({ _id: req.params.id });
+
+    return res.status(204).end();
+  }
+
+  return res.status(401).json({
+    status: 'fail',
+    message: 'You can only delete your own bookings',
+  });
+};
 
 export default {
   getAll,
@@ -141,5 +164,6 @@ export default {
   create,
   update,
   deleteBooking,
+  deleteMyBooking,
   getAllForLoggedInUser,
 };

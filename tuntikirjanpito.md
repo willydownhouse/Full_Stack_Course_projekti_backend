@@ -32,8 +32,10 @@ Päivämäärä, mitä tuli tehtyä, tunnit
 2.2.22: kaikkea pientä säätöä ja booking formin aloitus, 6h  
 3.2.22: booking formia, 2,5h  
 7.2.22: book -action ja bäkkiin emailin lähetys onnistuneesta buukkauksesta, 5h
+8.2.22: booking ok ja debloyattu, uudesta buukkauksesta tulee ilmoitus firman emailiin, 6h
+9.2.22: varauksen peruminen + testit, 4h
 
-92,5h
+102,5h
 
 Yhteensä:  
-135,5h
+150,5h

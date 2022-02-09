@@ -10,13 +10,13 @@ beforeAll(async () => {
   await api.post('/api/testing/init');
 });
 
-let token: string;
+let booking1: any;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-let resTrips: any;
-let id: string;
-
-describe('USER TESTS', () => {
+describe('User bookings', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let resTrips: any;
+  let id: string;
+  let token: string;
   beforeAll(async () => {
     const res = await api.post('/api/login').send({
       email: 'ville@test.fi',
@@ -30,7 +30,7 @@ describe('USER TESTS', () => {
     token = res.body.token as string;
 
     // CREATE TWO BOOKINGS FOR USER ville@test.fi
-    await api
+    booking1 = await api
       .post('/api/bookings')
       .set('Authorization', `Bearer ${token}`)
       .send({
@@ -60,6 +60,44 @@ describe('USER TESTS', () => {
 
     expect(res.statusCode).toBe(401);
     expect(res.body.message).toBe('Please login to get access');
+  });
+});
+
+describe('Delete bookings', () => {
+  let token: string;
+  beforeAll(async () => {
+    const res = await api.post('/api/login').send({
+      email: 'kimi@test.fi',
+      password: 'test1234',
+    });
+
+    token = res.body.token as string;
+  });
+  test('Fails if trying to delete other users booking', async () => {
+    const res = await api
+      .delete(`/api/bookings/${booking1.body._id}`)
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(res.statusCode).toEqual(401);
+    expect(res.body.message).toBe('You can only delete your own bookings');
+  });
+});
+describe('Delete bookings', () => {
+  let token: string;
+  beforeAll(async () => {
+    const res = await api.post('/api/login').send({
+      email: 'ville@test.fi',
+      password: 'test1234',
+    });
+
+    token = res.body.token as string;
+  });
+  test('OK if trying to delete your own booking', async () => {
+    const res = await api
+      .delete(`/api/bookings/${booking1.body._id}`)
+      .set('Authorization', `Bearer ${token}`);
+
+    expect(res.statusCode).toEqual(204);
   });
 });
 
