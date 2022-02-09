@@ -41,7 +41,7 @@ describe('USER TESTS', () => {
       .set('Authorization', `Bearer ${token2}`);
 
     expect(resUsers.statusCode).toBe(200);
-    expect(resUsers.body.users.length).toBe(2);
+    expect(resUsers.body.users.length).toBe(3);
   });
   test('User exist route', async () => {
     const res = await api.get(
