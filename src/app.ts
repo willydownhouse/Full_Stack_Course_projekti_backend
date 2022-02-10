@@ -15,6 +15,7 @@ import loginRouter from './routes/loginRouter';
 import userRouter from './routes/userRouter';
 import bookingRouter from './routes/bookingRouter';
 import reviewRouter from './routes/reviewRouter';
+import checkoutRouter from './routes/checkoutRouter';
 
 const app: Application = express();
 
@@ -47,13 +48,14 @@ app.use('/api/trips', tripRouter);
 app.use('/api/users', userRouter);
 app.use('/api/bookings', bookingRouter);
 app.use('/api/reviews', reviewRouter);
+app.use('/api/checkout', checkoutRouter);
 
 app.get('/health', (_, res) => {
   res.send('healthcheck ok');
 });
 
 app.get('/version', (_, res) => {
-  res.send('v12');
+  res.send('v17');
 });
 
 app.use(unknownEndpoint);

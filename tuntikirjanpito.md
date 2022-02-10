@@ -26,16 +26,17 @@ Päivämäärä, mitä tuli tehtyä, tunnit
 26.1.22: npm skriptejä produktion buildia varten, cypressillä ekoja testejä, 8h  
 27.1.22: notification component, development/produktion ympäristöjen säätöä, 3h  
 28.1.22: backend pipeline github actions, 2,5h  
-30.1.22: frontend pipeline github actions, 8,5h
-31.1.22: signup form, cypress testejä, mypage, 8h
+30.1.22: frontend pipeline github actions, 8,5h  
+31.1.22: signup form, cypress testejä, mypage, 8h  
 1.2.22: myPage,pari uutta reittiä backkiin ja testit niille, 8h  
 2.2.22: kaikkea pientä säätöä ja booking formin aloitus, 6h  
 3.2.22: booking formia, 2,5h  
 7.2.22: book -action ja bäkkiin emailin lähetys onnistuneesta buukkauksesta, 5h
 8.2.22: booking ok ja debloyattu, uudesta buukkauksesta tulee ilmoitus firman emailiin, 6h
 9.2.22: varauksen peruminen + testit, 4h
+10.2.22: stripe payments, 4h
 
-102,5h
+106,5h
 
 Yhteensä:  
-150,5h
+154,5h

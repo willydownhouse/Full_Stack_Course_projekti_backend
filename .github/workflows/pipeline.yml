@@ -25,6 +25,7 @@ jobs:
           DB_CONNECTION_TEST: ${{secrets.DB_CONNECTION_TEST}}
           JWT_SECRET: ${{secrets.JWT_SECRET}}
           JWT_EXPIRES_IN: ${{secrets.JWT_EXPIRES_IN}}
+          STRIPE_SECRET_KEY: ${{secrets.STRIPE_SECRET_KEY}}
       - name: debloy
         if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, 'skip')}}
         uses: akhileshns/heroku-deploy@v3.12.12
@@ -40,3 +41,4 @@ jobs:
           HD_JWT_SECRET: ${{secrets.JWT_SECRET}}
           HD_JWT_EXPIRES_IN: ${{secrets.JWT_EXPIRES_IN}}
           HD_EMAIL_PASSWORD_PROD: ${{secrets.EMAIL_PASSWORD_PROD}}
+          HD_STRIPE_SECRET_KEY: ${{secrets.STRIPE_SECRET_KEY}}

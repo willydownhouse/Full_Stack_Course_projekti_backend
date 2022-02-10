@@ -13,7 +13,7 @@ import config from '../utils/config';
 const getAllForLoggedInUser = async (req: Request, res: Response) => {
   const bookings: IBooking[] = await Booking.find({ user: req.user?.id })
     .populate('user', 'name email -_id')
-    .populate('trip', 'name -_id')
+    .populate('trip', 'name price -_id')
     .sort('-createdAt');
 
   return res.status(200).json({
