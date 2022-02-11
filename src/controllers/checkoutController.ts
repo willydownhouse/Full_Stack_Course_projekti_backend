@@ -1,6 +1,8 @@
 import config from '../utils/config';
 import Stripe from 'stripe';
 import { Request, Response } from 'express';
+import Booking from '../models/bookingModel';
+import IBooking from '../interfaces/booking';
 //import { v4 as uuid } from 'uuid';
 
 const stripe = new Stripe(config.STRIPE_SECRET_KEY as string, {
@@ -34,9 +36,21 @@ const handleCheckout = async (req: Request, res: Response) => {
     },
   });
 
-  res.status(201).json({
+  const booking: IBooking | null = await Booking.findByIdAndUpdate(
+    { _id: trip.bookingId as string },
+    {
+      status: 'paid',
+    },
+    {
+      runValidators: true,
+      new: true,
+    }
+  );
+
+  res.status(200).json({
     status: 'success',
     email: customer.email,
+    booking,
   });
 };
 
