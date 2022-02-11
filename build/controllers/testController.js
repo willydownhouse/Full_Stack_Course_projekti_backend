@@ -73,8 +73,15 @@ const initDataBase = (_, res) => __awaiter(void 0, void 0, void 0, function* () 
         confirmPassword: 'test1234',
         role: 'admin',
     });
+    const user3 = new userModel_1.default({
+        email: 'kimi@test.fi',
+        password: 'test1234',
+        confirmPassword: 'test1234',
+        role: 'admin',
+    });
     yield user2.save();
     yield user1.save();
+    yield user3.save();
     res.status(201).json({
         user1,
         user2,

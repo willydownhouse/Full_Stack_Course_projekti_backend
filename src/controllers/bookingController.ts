@@ -6,7 +6,7 @@ import { Request, Response } from 'express';
 import { checkedReqBody, checkBookingReqBody } from '../typeguards/booking';
 import {
   sendConfirmationEmailToCustomer,
-  sendEmailAboutNewBookingToAdmin,
+  //sendEmailAboutNewBookingToAdmin,
 } from '../utils/email';
 import config from '../utils/config';
 
@@ -92,14 +92,14 @@ const create = async (req: Request, res: Response) => {
     );
   }
 
-  if (config.NODE_ENV === 'production') {
-    await sendEmailAboutNewBookingToAdmin(
-      'adventure_buddy@outlook.com',
-      req.user?.email as string,
-      tripExists.name,
-      trip_date
-    );
-  }
+  // if (config.NODE_ENV === 'production') {
+  //   await sendEmailAboutNewBookingToAdmin(
+  //     'adventure_buddy@outlook.com',
+  //     req.user?.email as string,
+  //     tripExists.name,
+  //     trip_date
+  //   );
+  // }
 
   return res.status(201).json(booking);
 };

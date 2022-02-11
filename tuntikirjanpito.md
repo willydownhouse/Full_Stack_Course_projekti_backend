@@ -31,12 +31,13 @@ Päivämäärä, mitä tuli tehtyä, tunnit
 1.2.22: myPage,pari uutta reittiä backkiin ja testit niille, 8h  
 2.2.22: kaikkea pientä säätöä ja booking formin aloitus, 6h  
 3.2.22: booking formia, 2,5h  
-7.2.22: book -action ja bäkkiin emailin lähetys onnistuneesta buukkauksesta, 5h
-8.2.22: booking ok ja debloyattu, uudesta buukkauksesta tulee ilmoitus firman emailiin, 6h
-9.2.22: varauksen peruminen + testit, 4h
-10.2.22: stripe payments, 4h
+7.2.22: book -action ja bäkkiin emailin lähetys onnistuneesta buukkauksesta, 5h  
+8.2.22: booking ok ja debloyattu, uudesta buukkauksesta tulee ilmoitus firman emailiin, 6h  
+9.2.22: varauksen peruminen + testit, 4h  
+10.2.22: stripe payments, 4h  
+11.2.22: stripeOk, 2h
 
-106,5h
+108,5h
 
 Yhteensä:  
-154,5h
+156,5h

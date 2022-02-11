@@ -17,6 +17,7 @@ const loginRouter_1 = __importDefault(require("./routes/loginRouter"));
 const userRouter_1 = __importDefault(require("./routes/userRouter"));
 const bookingRouter_1 = __importDefault(require("./routes/bookingRouter"));
 const reviewRouter_1 = __importDefault(require("./routes/reviewRouter"));
+const checkoutRouter_1 = __importDefault(require("./routes/checkoutRouter"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
@@ -43,11 +44,12 @@ app.use('/api/trips', tripRouter_1.default);
 app.use('/api/users', userRouter_1.default);
 app.use('/api/bookings', bookingRouter_1.default);
 app.use('/api/reviews', reviewRouter_1.default);
+app.use('/api/checkout', checkoutRouter_1.default);
 app.get('/health', (_, res) => {
     res.send('healthcheck ok');
 });
 app.get('/version', (_, res) => {
-    res.send('v12');
+    res.send('v17');
 });
 app.use(errorController_1.unknownEndpoint);
 app.use(errorController_1.errorController);

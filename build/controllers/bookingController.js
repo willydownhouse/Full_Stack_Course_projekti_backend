@@ -21,7 +21,7 @@ const getAllForLoggedInUser = (req, res) => __awaiter(void 0, void 0, void 0, fu
     var _a;
     const bookings = yield bookingModel_1.default.find({ user: (_a = req.user) === null || _a === void 0 ? void 0 : _a.id })
         .populate('user', 'name email -_id')
-        .populate('trip', 'name -_id')
+        .populate('trip', 'name price -_id')
         .sort('-createdAt');
     return res.status(200).json({
         docs: bookings.length,
@@ -115,11 +115,32 @@ const deleteBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
     return res.status(204).end();
 });
+const deleteMyBooking = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _f;
+    const booking = yield bookingModel_1.default.findById({
+        _id: req.params.id,
+    });
+    if (!booking) {
+        return res.status(400).json({
+            status: 'fail',
+            message: 'No document with that ID',
+        });
+    }
+    if (booking.user == ((_f = req.user) === null || _f === void 0 ? void 0 : _f.id)) {
+        yield bookingModel_1.default.deleteOne({ _id: req.params.id });
+        return res.status(204).end();
+    }
+    return res.status(401).json({
+        status: 'fail',
+        message: 'You can only delete your own bookings',
+    });
+});
 exports.default = {
     getAll,
     getOne,
     create,
     update,
     deleteBooking,
+    deleteMyBooking,
     getAllForLoggedInUser,
 };
