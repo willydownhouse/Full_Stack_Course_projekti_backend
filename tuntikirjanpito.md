@@ -35,9 +35,12 @@ Päivämäärä, mitä tuli tehtyä, tunnit
 8.2.22: booking ok ja debloyattu, uudesta buukkauksesta tulee ilmoitus firman emailiin, 6h  
 9.2.22: varauksen peruminen + testit, 4h  
 10.2.22: stripe payments, 4h  
-11.2.22: stripeOk, 2h
+11.2.22: stripeOk, 2h  
+14.2.22: react router ongelma, 5h  
+15.2.22: rating stars ja muita tyyli säätöjä, 6h  
+16.2.22: vimmeisiä säätöjä, testejä, log out notification yms., 7,5h
 
-108,5h
+127h
 
 Yhteensä:  
-156,5h
+175h
